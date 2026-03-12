@@ -13,10 +13,6 @@ public class Reserva {
         return usuari;
     }
 
-    public Llibre getLlibre() {
-        return llibre;
-    }
-
     @Override
     public String toString() {
         return "Reserva{" +
