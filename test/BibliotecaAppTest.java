@@ -28,6 +28,20 @@ class BibliotecaAppTest {
         assertEquals(l,Arrays.stream(biblioteca.getPrestecsUsuari(usr)).toList().get(0));
     }
 
+    @org.junit.jupiter.api.Test
+    void prestarLlibre_PrestarLlibreJaPrestat() {
+        //preapare
+        Llibre l = biblioteca.getLlibres().get(0);
+        Usuari usr1 = biblioteca.getUsuaris().get(0);
+        Usuari usr2 = biblioteca.getUsuaris().get(1);
+        biblioteca.prestar(l,usr1.getId());
+        //act
+        boolean result = biblioteca.prestar(l,usr2.getId());
+        //assert
+        assertFalse(result);
+        assertEquals(0,biblioteca.getPrestecsUsuari(usr2).length);
+    }
+
 
 
     private static Biblioteca inicialitzarBiblioteca() {
