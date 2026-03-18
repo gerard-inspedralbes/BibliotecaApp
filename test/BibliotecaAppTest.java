@@ -1,6 +1,4 @@
-import model.Biblioteca;
-import model.Llibre;
-import model.Usuari;
+import model.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,12 +59,18 @@ class BibliotecaAppTest {
                 "J.R.R. Tolkien"
         };
 
-        String[] noms = {
+        String[] alumnes = {
                 "Anna",
                 "Marc",
                 "Laia",
                 "Joan",
                 "Clara"
+        };
+
+        String[] professors = {
+                "Toni",
+                "Gerard",
+                "Rafa"
         };
 
         // ArrayLists del sistema
@@ -79,9 +83,14 @@ class BibliotecaAppTest {
             llibres.add(llibre);
         }
 
-        // Crear 5 usuaris
-        for (int i = 0; i < noms.length; i++) {
-            Usuari usuari = new Usuari( noms[i]);
+        // Crear 5 alumnes
+        for (int i = 0; i < alumnes.length; i++) {
+            Usuari usuari = new Alumne( alumnes[i]);
+            usuaris.add(usuari);
+        }
+        // Crear 3 professors
+        for (int i = 0; i < professors.length; i++) {
+            Usuari usuari = new Professor( professors[i]);
             usuaris.add(usuari);
         }
         return new Biblioteca(llibres,usuaris);

@@ -1,6 +1,6 @@
 package model;
 
-public class Usuari {
+public abstract class Usuari implements Comparable<Usuari> {
     private static int contadorUsuaris = 0;
     private int id;
     private String nom;
@@ -11,16 +11,22 @@ public class Usuari {
         this.nom = nom;
     }
 
+    protected abstract int getMaxPrestecs();
+
     public int getId() {
         return this.id;
     }
 
     @Override
     public String toString() {
-        return "Usuari{" +
+        return
                 "id=" + id +
-                ", nom='" + nom + '\'' +
-                '}';
+                ", nom='" + nom + '\'' ;
+    }
+
+    @Override
+    public int compareTo(Usuari usuari) {
+        return this.nom.compareTo(usuari.nom);
     }
 
 
