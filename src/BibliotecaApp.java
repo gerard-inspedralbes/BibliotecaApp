@@ -1,5 +1,6 @@
 import model.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -10,7 +11,13 @@ public class BibliotecaApp {
     private static Biblioteca biblioteca;
     private static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        biblioteca = inicialitzarBiblioteca();
+        File file = new File("llibres.txt");
+        if(file.exists()){
+            ArrayList<Llibre> llibres = FitxerManager.carregarLlibres("llibres.txt");
+            biblioteca = inicialitzarBiblioteca(llibres);
+        }else {
+            biblioteca = inicialitzarBiblioteca();
+        }
 
         int opcio;
 
@@ -49,6 +56,7 @@ public class BibliotecaApp {
                     break;
 
                 case 0:
+                    FitxerManager.guardarLlibres(biblioteca.getLlibres(),"llibres.txt");
                     System.out.println("Adeu!");
                     break;
             }
@@ -125,6 +133,41 @@ public class BibliotecaApp {
         }
 
     }
+
+    private static Biblioteca inicialitzarBiblioteca(ArrayList<Llibre> llibres) {
+        // Arrays amb dades inicials
+
+        String[] alumnes = {
+                "Anna",
+                "Marc",
+                "Laia",
+                "Joan",
+                "Clara"
+        };
+
+        String[] professors = {
+                "Toni",
+                "Gerard",
+                "Rafa"
+        };
+
+        // ArrayLists del sistema
+        ArrayList<Usuari> usuaris = new ArrayList<>();
+
+
+        // Crear 5 alumnes
+        for (int i = 0; i < alumnes.length; i++) {
+            Usuari usuari = new Alumne( alumnes[i]);
+            usuaris.add(usuari);
+        }
+        // Crear 3 professors
+        for (int i = 0; i < professors.length; i++) {
+            Usuari usuari = new Professor( professors[i]);
+            usuaris.add(usuari);
+        }
+        return new Biblioteca(llibres,usuaris);
+    }
+
 
 
     private static Biblioteca inicialitzarBiblioteca() {

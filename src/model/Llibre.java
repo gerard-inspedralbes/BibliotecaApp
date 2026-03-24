@@ -44,4 +44,13 @@ public class Llibre {
                 ", disponible=" + disponible +
                 '}';
     }
+
+    public String toCSV() {
+        return this.id + ";" + this.titol + ";" +this.autor + ";" + this.disponible;
+    }
+
+    public static Llibre fromCSV(String linia){
+        String[] p = linia.split(";");
+        return new Llibre(p[1],p[2],Boolean.parseBoolean(p[3]));
+    }
 }
