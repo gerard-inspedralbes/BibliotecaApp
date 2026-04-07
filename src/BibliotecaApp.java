@@ -1,3 +1,5 @@
+import DAO.DAOBiblioteca;
+import DAO.DAOBibliotecaFile;
 import model.*;
 
 import java.io.File;
@@ -10,14 +12,8 @@ import java.util.Scanner;
 public class BibliotecaApp {
     private static Biblioteca biblioteca;
     private static Scanner sc = new Scanner(System.in);
+    private static DAOBiblioteca daoBiblioteca= new DAOBibliotecaFile();
     public static void main(String[] args) {
-        File file = new File("llibres.txt");
-        if(file.exists()){
-            ArrayList<Llibre> llibres = FitxerManager.carregarLlibres("llibres.txt");
-            biblioteca = inicialitzarBiblioteca(llibres);
-        }else {
-            biblioteca = inicialitzarBiblioteca();
-        }
 
         int opcio;
 
@@ -56,7 +52,6 @@ public class BibliotecaApp {
                     break;
 
                 case 0:
-                    FitxerManager.guardarLlibres(biblioteca.getLlibres(),"llibres.txt");
                     System.out.println("Adeu!");
                     break;
             }
@@ -71,7 +66,7 @@ public class BibliotecaApp {
     }
 
     private static void mostrarLlibres() {
-        for (Llibre l : biblioteca.getLlibres()) {
+        for (Llibre l : daoBiblioteca.getLlibres()) {
             System.out.println(l);
         }
     }
