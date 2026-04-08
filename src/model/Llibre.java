@@ -1,21 +1,20 @@
 package model;
 
 public class Llibre {
-    private static int contadorLlibres = 0;
+
     private int id;
     private String titol;
     private String autor;
     boolean disponible;
 
-    public Llibre(String titol, String autor, boolean disponible) {
-        contadorLlibres++;
-        this.id = contadorLlibres;
+    public Llibre(int id, String titol, String autor, boolean disponible) {
+        this.id = id;
         this.titol = titol;
         this.autor = autor;
         this.disponible = disponible;
     }
 
-    public int getid() {
+    public int getId() {
         return id;
     }
 
@@ -31,7 +30,7 @@ public class Llibre {
         return disponible;
     }
 
-    protected void setDisponible(boolean disponible) {
+    public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
 
@@ -45,12 +44,18 @@ public class Llibre {
                 '}';
     }
 
-    public String toCSV() {
-        return this.id + ";" + this.titol + ";" +this.autor + ";" + this.disponible;
+    public String toCSV(){
+        return this.id+";"+this.autor+";"+this.titol+";"+ this.disponible;
     }
 
     public static Llibre fromCSV(String linia){
         String[] p = linia.split(";");
-        return new Llibre(p[1],p[2],Boolean.parseBoolean(p[3]));
+
+        int id = Integer.parseInt(p[0]);
+        String autor = p[1];
+        String titol = p[2];
+        boolean disponible = Boolean.parseBoolean(p[3]);
+
+        return new Llibre(id, titol, autor, disponible);
     }
 }

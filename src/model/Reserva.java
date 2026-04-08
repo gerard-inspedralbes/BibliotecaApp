@@ -1,23 +1,28 @@
 package model;
 
 public class Reserva {
-    private Usuari usuari;
+    private Usuari user;
     private Llibre llibre;
 
-    public Reserva(Usuari usuari, Llibre llibre) {
-        this.usuari = usuari;
+    public Reserva(Usuari user, Llibre llibre) {
+        this.user = user;
         this.llibre = llibre;
     }
 
-    public Usuari getUsuari() {
-        return usuari;
+    public Usuari getUser() {
+        return user;
+    }
+
+    public Llibre getLlibre() {
+        return llibre;
     }
 
     @Override
     public String toString() {
         return "Reserva{" +
-                "usuari=" + usuari +
+                "user=" + user +
                 ", llibre=" + llibre +
                 '}';
     }
 }
+

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public abstract class Usuari implements Comparable<Usuari> {
     private static int contadorUsuaris = 0;
     private int id;
@@ -11,7 +13,12 @@ public abstract class Usuari implements Comparable<Usuari> {
         this.nom = nom;
     }
 
-    protected abstract int getMaxPrestecs();
+    public Usuari(int id, String nom) {
+        this.id = id;
+        this.nom = nom;
+    }
+
+    public abstract int getMaxPrestects();
 
     public int getId() {
         return this.id;
@@ -21,12 +28,13 @@ public abstract class Usuari implements Comparable<Usuari> {
     public String toString() {
         return
                 "id=" + id +
-                ", nom='" + nom + '\'' ;
+                ", nom='" + nom + '\'';
     }
 
     @Override
     public int compareTo(Usuari usuari) {
-        return this.nom.compareTo(usuari.nom);
+        return this.nom.length()-usuari.nom.length();
+        //return this.nom.compareTo(usuari.nom.toString());
     }
 
 

@@ -2,13 +2,12 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.TreeMap;
 
 public class Biblioteca {
     private ArrayList<Llibre> llibres;
     private ArrayList<Usuari> usuaris;
     private HashMap<Usuari, ArrayList<Prestec>> prestecs;
-    private HashMap<Usuari, ArrayList<Reserva>> reserva;
+    private HashMap<Usuari, ArrayList<Reserva>> reserves;
 
     public Biblioteca(ArrayList<Llibre> llibres, ArrayList<Usuari> usuaris) {
         this.llibres = llibres;
@@ -19,13 +18,15 @@ public class Biblioteca {
     public ArrayList<Usuari> getUsuaris() {
         return usuaris;
     }
-
     public ArrayList<Llibre> getLlibres() {
         return llibres;
     }
+    
 
-    public boolean prestar(Llibre l, int idUsr) {
-        if (!l.isDisponible()) return false;
+    public boolean prestar(Llibre l, int idUsr) throws LlibreNoDisponibleException{
+        if (!l.isDisponible()) {
+            throw new LlibreNoDisponibleException("El llibre no està disponible");
+        }
 
         for (Usuari u : usuaris) {
             if (u.getId() == idUsr) {
@@ -69,7 +70,7 @@ public class Biblioteca {
 
         for (Prestec p : llistaPrestecs) {
 
-            if (p.getLlibre().getid() == idLlib) {
+            if (p.getLlibre().getId() == idLlib) {
 
                 p.getLlibre().setDisponible(true);
                 llistaPrestecs.remove(p);
